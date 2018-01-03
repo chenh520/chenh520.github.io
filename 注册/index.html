@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	</head>
+	<body>
+		<div id="box">
+			<img src="img/logo_icon.png"/>
+		</div>
+		<div id="box2">
+			<p class="p">手机号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" value="请输入手机号"onfocus="if 
+				(value =='请输入手机号'){value =''}" onblur="if(value ==''){value='请输入手机号'}"id="input1"/></p>
+			<p class="p">验证码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" value="输入验证码" onfocus="if 
+				(value =='输入验证码'){value =''}" onblur="if(value ==''){value='输入验证码'}"id="input2"/></p>
+			<p class="p">创立密码　&nbsp;<input type="password" placeholder="6－20位字符组成，区分大小写" id="pw1"/></p>
+			<p class="p">密码确认　&nbsp;<input type="password" placeholder="确认密码" id="pw1"/></p>
+			<input type="button" value="sfjs" id="code">
+			<a href="javascript:;"onclick="yzm()" id="aj">看不清换一张</a>
+		</div>
+		<div id="box3">
+			<p><input type="checkbox" id="cb" /><span>同意 </span><a href="#">粮仓注册条款</a></p>
+		</div>
+	</body>
+	<div id="btn3">
+		<span>立即注册</span>
+	</div>
+	<div id="box4">
+		<ul>
+			<li class="l1"><a href="#"><img src="img/qqnormal.png"/></a></li>
+			<li class="l2"><a href="#"><img src="img/xinlangnormal.png"/></a></li>
+			<li class="l3"><a href="#"><img src="img/tengxunmouse.png"/></a></li>
+			<li class="l4"><a href="#"><img src="img/doubannormal.png"/></a></li>
+		</ul>
+		<a href="http://127.0.0.1:8020/%E7%99%BB%E9%99%86/index.html"><span>登录粮仓</span></a>
+	</div>
+	<div id="box5">
+		<a href="#"><span>fermLIVING.</span>
+		<div id="box5-1">
+			<img src="img/60.jpg">
+		</div>
+		</a>
+	</div>
+</html>
+<script type="text/javascript">
+	var oBtn3=document.getElementById("btn3");
+	var oUsername = document.getElementById("input1")
+    var oPassword = document.getElementById("pw1")
+    var oInp= document.getElementById("input2")
+    
+	 var code;
+    function yzm(){
+     
+        code = '';
+        var codeLength = 4;
+        var codeV = document.getElementById('code');
+        var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R', 'S','T','U','V','W','X','Y','Z');
+        for(var i = 0; i < codeLength; i++){
+             var index = Math.floor(Math.random()*36);
+             code += random[index]; 
+        }
+        codeV.value = code;
+    }
+
+    window.onload = function (){
+        yzm();
+    }
+    oBtn3.onclick=function(){
+    	var xhr = new XMLHttpRequest()
+    	var strUsername = oUsername.value
+		var strPassword = oPassword.value
+		var strI=oInp.value
+		var cc=yzm()
+		if(cc!= strI){
+			alert("请输入正确的验证码")
+		}else{
+	// 监听网络状态改变，
+	xhr.onreadystatechange = function() {
+		
+		// 请求准备状态值：
+		if (xhr.readyState == 4) {
+			// HTTP协议状态码： 用于保证数据的正确性
+			if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
+				// 数据已回来，并且是正确的数据！
+				
+				// JSON 还是 字符串？ 如何确定变量的类型
+				
+				console.log( xhr.responseText );
+				
+				var str = xhr.responseText;
+				
+				// 转换成JSON对象
+				var obj = JSON.parse(str);
+				
+					var  re = /^1[345678][0-9]{9}$/g;
+					if ( re.test(obj.code)&&obj.code == 0) {
+						alert("注册成功，恭喜")
+				}else{
+					alert(obj.message)
+				}
+				
+			}
+		}
+	}
+	
+	xhr.open("POST", "http://h6.duchengjiu.top/shop/api_user.php", true)
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send("username="+strUsername+
+			"&password="+strPassword+
+			"&status=register");
+}	
+    
+  }
+</script>
