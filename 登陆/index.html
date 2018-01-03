@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+
+	</head>
+	<body>
+		<div id="box">
+			<img src="img/nlicon.png"  />
+		</div>
+		<p class="p1s"><input type="text" placeholder="输入手机号"id="tx"value="" /></p>
+		<p class="p2s"><input type="text" placeholder="输入验证码"id="tx2" /></p>
+		<p class="p3s"><input type="checkbox"id="cb" /><span id="span2">自动登陆</span></p>
+		<div id="btn2">
+			<span id="span3">登录</span>
+		</div>
+		<a href="#"><p class="p4s">更多登录方式&gt;</p></a>	
+	</body>
+	<script type="text/javascript">
+		var oBtn2=document.getElementById('btn2');
+var oUsername=document.getElementById('tx')
+var oPassword=document.getElementById('tx2')
+//oBtn2.onclick = function(){
+//	var  re = /^1[345678][0-9]{9}$/g;
+//	if(re.test(value)){
+//		mrd();
+//	}else{
+//		alert("请输入正确的手机号");
+//	}
+//}
+//function mrd(){
+//	var arr=["","巅峰时代","cf","dsss"]
+//	var n=Math.floor(Math.random()*arr.length+1)-1;
+//	alert(arr[n]);
+//}
+oBtn2.onclick = function() {
+	var strUsername = oUsername.value
+	var strPassword = oPassword.value
+	var xhr = new XMLHttpRequest()
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
+				console.log( xhr.responseText );
+				var str = xhr.responseText;
+				var obj = JSON.parse(str);
+				var  re = /^1[345678][0-9]{9}$/g;
+				if (re.test(obj.code)&& obj.code== 0) {
+					alert("登录成功，恭喜")
+				} else {
+					alert(obj.message)
+				}
+			}
+		}
+	}
+	
+	xhr.open("POST", "http://h6.duchengjiu.top/shop/api_user.php", true)
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send("username="+strUsername+
+			"&password="+strPassword+
+			"&status=register");
+}	
+	</script>

@@ -1,0 +1,74 @@
+*{margin: 0px;padding: 0px;}
+li{list-style: none;}
+img{border: none;}
+a{text-decoration: none;}
+body{
+	background:#fff;
+/*	position: absolute;*/
+height: auto;
+}
+#box{width: 500px;
+	height: 400px;
+	background:#fff;
+	margin: 0px auto;
+	/*position: absolute;left:50% ;margin-left:-250px;top:0px;*/
+}
+#box img{
+	margin: 100px 193.5px;
+	
+}
+.p1s, .p2s, .p3s{
+	width: 600px;
+	height: 60px;
+}
+#tx{
+	/*margin: 0px 600px;*/
+	border: 1px solid #fff;
+	border-bottom: 1px solid #000;
+	height: 25px;
+	width: 380px;
+	background:url(../img/nlphone.png)no-repeat;
+	outline:none;
+	position: absolute; left:50%;margin-left:-168px;top:auto;
+	font-size: 20px;
+	padding-left: 30px;
+}
+#tx2{
+	border: 1px solid #fff;
+	border-bottom: 1px solid #000;
+	height: 25px;
+	width: 380px;
+	background:url(../img/nlcode.png)no-repeat;
+	outline:none;
+	position: absolute; left:50%;margin-left:-168px;top:auto;
+	font-size: 20px;
+	padding-left: 30px;
+}
+
+
+a{
+	color: #000000;
+}
+#span2{
+	font-size: 13px;
+	position: absolute;left:0px top:auto;
+}
+.p3s{
+	position: absolute; left:50%;margin-left:-168px;top:auto;
+}
+#btn2{
+	width: 374px;
+	height: 63px;
+	background: #25292e;
+	position: absolute; left:50%;margin-left:-168px;top:auto;margin-top: 55px;
+	border-radius:5px;
+}
+#span3{
+	font: 30px/63px "微软雅黑";
+	color: #fff;
+	/*text-align:center;*/
+	margin-left: 155px;
+}
+.p4s{
+	position: absolute; left:50%;margin-left:-168px;top:auto;margin-top: 159px;
+}
